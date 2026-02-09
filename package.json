@@ -1,0 +1,14 @@
+{
+  "name": "devops-reference-project",
+  "version": "1.0.0",
+  "description": "Complete DevOps reference project with modern tools",
+  "scripts": {
+    "setup": "./scripts/setup.sh",
+    "deploy": "./scripts/deploy.sh",
+    "scan": "./scripts/security-scan.sh",
+    "destroy": "./scripts/destroy.sh"
+  },
+  "keywords": ["devops", "kubernetes", "gitops", "monitoring", "security"],
+  "author": "DevOps Team",
+  "license": "MIT"
+}

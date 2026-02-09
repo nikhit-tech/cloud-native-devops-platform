@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-configuration-as-code
+  namespace: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/component: configuration
+data:
+  jenkins.yaml: |
+    jenkins:
+      systemMessage: "DevOps Reference Project - Jenkins CI Platform"
+      securityRealm:
+        local:
+          allowsSignup: false
+          users:
+          - id: "admin"
+            password: "admin123"
+      authorizationStrategy:
+        globalMatrix:
+          permissions:
+          - "Overall/Administer:admin"
+          - "Overall/Read:anonymous"
+      clouds:
+      - kubernetes:
+          name: "kubernetes"
+          serverUrl: "https://kubernetes.default"
+          namespace: "jenkins"
+          jenkinsUrl: "http://jenkins-service.jenkins.svc.cluster.local:8080"
+          jenkinsTunnel: "jenkins-agent.jenkins.svc.cluster.local:50000"
+          templates:
+          - name: "jenkins-agent"
+            label: "jenkins-agent"
+            serviceAccount: "jenkins"
+            containerTemplate:
+              name: "jnlp"
+              image: "jenkins/inbound-agent:latest"
+              alwaysPullImage: true
+              workingDir: "/home/jenkins/agent"
+              ttyEnabled: true
+              command: ""
+              args: ""
+            nodeUsageMode: "NORMAL"
+            idleMinutes: 5
+            numExecutors: 1
+            connectTimeout: 300
+            readTimeout: 300
+
+    tool:
+      git:
+        installations:
+        - home: "git"
+          name: "Default"
+    
+    unclassified:
+      location:
+        url: "http://jenkins-service.jenkins.svc.cluster.local:8080/"
