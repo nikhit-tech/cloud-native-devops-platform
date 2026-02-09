@@ -1,6 +1,53 @@
 # DevOps Reference Project
 
-A complete, production-ready DevOps reference project demonstrating modern tools and best practices for Kubernetes-based deployments.
+A comprehensive DevOps reference project demonstrating modern tools and best practices for Kubernetes-based deployments.
+
+## ⚙️ Before You Start
+
+### 🔧 Configuration Required
+
+This project uses placeholders that must be configured before use:
+
+1. **Configure Environment Variables**
+   ```bash
+   # Copy the example configuration
+   cp .env.example .env
+   
+   # Edit with your values
+   nano .env
+   ```
+   
+2. **Key Settings to Update**
+   - `GITHUB_ORG`: Your GitHub organization or username
+   - `GITHUB_REPO`: Your repository name (if forked)
+   - `CONTAINER_REGISTRY`: Your container registry (default: ghcr.io)
+   - `CLUSTER_NAME`: Your Kubernetes cluster name
+
+3. **Update Repository References**
+   Replace all `__YOUR_ORG__` placeholders in the following files:
+   - `manifests/argocd/argocd-config.yaml`
+   - `manifests/argocd/sample-app.yaml`
+   - `README.md` (clone commands)
+
+> **Note**: After configuring, update the `__YOUR_ORG__` placeholders in all YAML files and documentation with your actual GitHub organization.
+
+## 🚀 Implementation Status
+
+### ✅ Fully Implemented
+- **Kind Clusters**: Complete local development setup with port mapping
+- **Security Context**: Pod and container security configurations
+- **GitOps**: Argo CD integration with automated deployments
+- **Monitoring**: Prometheus + Grafana with basic dashboards
+- **CI/CD**: GitHub Actions workflows with security scanning
+- **Namespaces**: Automated namespace creation and management
+
+### 🚧 Placeholders/Planned Features
+- **EKS/GKE/AKS**: Currently placeholder configurations only
+- **Remote State Management**: Template configurations available
+- **Advanced Security**: Network policies and RBAC extensions
+- **Production Monitoring**: Alerting rules and advanced dashboards
+
+> **⚠️ Important**: This project currently provides **full support for Kind clusters only**. EKS, GKE, and AKS configurations are templates/placeholders that require additional implementation for production use.
 
 ## 🏗️ Architecture Overview
 
@@ -74,7 +121,8 @@ graph TB
 | **Observability** | Grafana | v10.0.0+ | Data visualization and dashboards |
 | **Container Runtime** | Docker | Latest | Container building and management |
 | **Container Registry** | Any | - | Container image storage |
-| **Kubernetes** | Kind/EKS/GKE/AKS | 1.25+ | Container orchestration platform |
+| **Kubernetes** | Kind (Full) | 1.25+ | Container orchestration platform |
+| | **EKS/GKE/AKS** | Placeholders | Managed cluster support (planned) |
 | **Local Development** | Kind | v0.20+ | Local Kubernetes cluster |
 
 ## 📋 Prerequisites
@@ -145,7 +193,7 @@ brew install kubectl docker helm terraform kind trivy argocd
 
 ## 🏗️ Infrastructure Provisioning with Terraform
 
-This project includes Terraform modules to provision and manage Kubernetes infrastructure across different environments and cloud providers.
+This project includes Terraform modules to provision and manage Kubernetes infrastructure. Currently supports Kind clusters with placeholder configurations for managed cloud providers.
 
 ### Terraform Architecture
 
@@ -209,7 +257,7 @@ make terraform-apply
 ```
 
 #### 2. Managed Kubernetes Clusters
-Production-ready managed clusters:
+*Placeholder configurations - requires additional implementation for production use:*
 
 **Amazon EKS:**
 ```bash
@@ -316,10 +364,10 @@ kubectl get nodes
 
 #### Cluster Module (`modules/cluster/`)
 Creates and configures Kubernetes clusters:
-- **Kind**: Local Docker-based cluster
-- **EKS**: Amazon EKS with managed node groups
-- **GKE**: Google Kubernetes Engine
-- **AKS**: Azure Kubernetes Service
+- **Kind**: ✅ Fully implemented local Docker-based cluster
+- **EKS**: 🚧 Placeholder configuration (requires AWS provider)
+- **GKE**: 🚧 Placeholder configuration (requires Google provider)  
+- **AKS**: 🚧 Placeholder configuration (requires Azure provider)
 
 Features:
 - Automatic port mapping for local development
@@ -624,7 +672,7 @@ Choose your preferred setup approach:
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-org/devops-reference-project.git
+git clone https://github.com/__YOUR_ORG__/devops-reference-project.git
 cd devops-reference-project
 ```
 
@@ -668,7 +716,7 @@ make setup
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-org/devops-reference-project.git
+git clone https://github.com/__YOUR_ORG__/devops-reference-project.git
 cd devops-reference-project
 ```
 
@@ -704,7 +752,7 @@ make setup
 
 #### 1. Clone and Setup Infrastructure
 ```bash
-git clone https://github.com/your-org/devops-reference-project.git
+git clone https://github.com/__YOUR_ORG__/devops-reference-project.git
 cd devops-reference-project
 
 # Use Terraform for infrastructure

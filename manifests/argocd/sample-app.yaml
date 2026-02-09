@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/devops-reference-project.git
+    repoURL: https://github.com/__YOUR_ORG__/devops-reference-project.git
     targetRevision: HEAD
     path: apps/sample-app/k8s
   destination:

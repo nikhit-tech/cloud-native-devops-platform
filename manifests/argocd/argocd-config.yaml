@@ -12,7 +12,7 @@ data:
   statusbadge.enabled: "true"
   repositories: |
     - type: git
-      url: https://github.com/your-org/devops-reference-project.git
+      url: https://github.com/__YOUR_ORG__/devops-reference-project.git
 ---
 apiVersion: v1
 kind: Secret

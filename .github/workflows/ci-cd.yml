@@ -46,12 +46,12 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: apps/sample-app/package.json
+        cache-dependency-path: apps/sample-app
         
     - name: Install dependencies
       run: |
         cd apps/sample-app
-        npm ci
+        npm install --no-audit --no-fund
         
     - name: Run tests
       run: |
@@ -63,9 +63,12 @@ jobs:
         cd apps/sample-app
         npm run lint
         
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
     - name: Build Docker image
       run: |
-        docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} apps/sample-app/
+        docker buildx build --load -t ${{ env.IMAGE_NAME }}:${{ github.sha }} apps/sample-app/
         
     - name: Run Trivy container scan
       uses: aquasecurity/trivy-action@master

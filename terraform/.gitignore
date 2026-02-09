@@ -1,3 +1,5 @@
+.docx
+
 # Terraform Configuration Files
 *.tfstate
 *.tfstate.*
